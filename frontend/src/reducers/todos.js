@@ -10,8 +10,23 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 todos: action.payload
-            }
+            };
+        case DELETE_TODO:
+            return {
+                ...state,
+                todos: state.todos.filter(todo => todo.id != action.payload)
+            };
+        case TOGGLE_TODO:
+            return {
+                ...state,
+                todos: [...state.todos]
+            };
+        case ADD_TODO:
+            return {
+                ...state,
+                todos: [...state.todos, action.payload]
+            };
         default:
             return state;
     }
-}
+};

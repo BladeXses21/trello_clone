@@ -5,8 +5,8 @@ import List from './List'
 export default function DashBoard() {
     return (
         <Fragment>
-            <Form />
             <List />
+            <Form />
         </Fragment>
     )
 }

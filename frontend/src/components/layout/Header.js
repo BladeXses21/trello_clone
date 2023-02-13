@@ -1,21 +1,54 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment, useState, useEffect } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import HeaderCss from './Header.module.css';
+import { logout } from '../../actions/auth';
+import { connect } from 'react-redux';
 
-export class Header extends Component {
-  render() {
+
+const Header = ({ logout, isAuthenticated }) => {
+    const [navigate, setNavigate] = useState(false);
+
+    const logout_user = () => {
+        logout();
+    };
+
+    const guestLinks = () => (
+        <Fragment>
+            <li className="nav-item">
+                <Link className="nav-link" to="/login">Login</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/signup">Sign Up</Link>
+            </li>
+        </Fragment>
+    );
+
+    const authLinks = () => (
+        <li className="nav-item">
+            <a className="nav-link" href='#!' onClick={logout_user}>Logout</a>
+        </li>
+    );
+
     return (
-      <nav className="navbar navbar-expand-sm navbar-light bg-light">
-                <a className="navbar-brand" href="#">Todoapp</a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
+        <Fragment>
+            <div>
+              <nav className="navbar navbar-expand-lg navbar-light bg-black" id='navbar'>
+                <Link className="navbar-brand" to="/">Auth System</Link>
                     <ul className="navbar-nav">
-
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/todo">Todo <span className='sr-only'>(current)</span></Link>
+                        </li>
+                        { isAuthenticated ? authLinks() : guestLinks() }
                     </ul>
-                </div>
-            </nav>
-    )
-  }
-}
+              </nav>
+            </div>
+            {navigate ? <Navigate to='/' /> : <Fragment></Fragment>}
+        </Fragment>
+    );
+};
 
-export default Header
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { logout })(Header);

@@ -1,0 +1,27 @@
+.headerColor {
+    background: linear-gradient(to top, #ffffff 0%, #020202 100%);
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+
+.headerAuthLink {
+    display: inline-block;
+    whiteSpace: nowrap;
+    lineHeight: inherit;
+    marginRight: 1rem;
+    paddingTop: 0.4rem;
+    paddingBottom: 0.4rem;
+}
+
+.headerUl {
+    position: static;
+    float: none;
+    color: #212529;
+    zIndex: 1000;
+    textAlign: left;
+    list-style: none;
+    border: 1px solid rgba(0, 0, 0, .15);
+    borderRadius: 0.25rem;
+}
