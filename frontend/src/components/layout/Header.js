@@ -29,15 +29,19 @@ const Header = ({ logout, isAuthenticated }) => {
         </li>
     );
 
+    const todoLinks = () => (
+        <li className="nav-item">
+            <Link className="nav-link" to="/todo">Todo <span className='sr-only'>(current)</span></Link>
+        </li>
+    );
+
     return (
         <Fragment>
             <div>
               <nav className="navbar navbar-expand-lg navbar-light bg-black" id='navbar'>
                 <Link className="navbar-brand" to="/">Auth System</Link>
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/todo">Todo <span className='sr-only'>(current)</span></Link>
-                        </li>
+                        { isAuthenticated ? todoLinks() : null}
                         { isAuthenticated ? authLinks() : guestLinks() }
                     </ul>
               </nav>
