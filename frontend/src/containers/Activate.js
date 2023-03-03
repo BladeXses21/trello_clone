@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState, Component } from "react";
+import { Link, Route, Navigate, useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Fragment } from 'react';
+import { verify } from '../actions/auth';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 
-const Activate = () => {
-    <div>
-        Activate
-    </div>
+
+const Activate = ({ verify }) => {
+    const [verified, setVerified] = useState(false);
+    const { uid, token } = useParams();
+
+    const verify_account = e => {
+        verify(uid, token);
+        setVerified(true);
+    }
+
+    if (verified) {
+        return <Navigate to='/' />
+    };
+
+    return (
+        <Fragment>
+            <div className="container">
+                <div className="jumbotron mt-5">
+                    <div className="d-flex flex-column justify-content-center align-items-center" style={{ marginTop: '200px' }}>
+                        <h1> Verify your Account </h1>
+                        <button onClick={verify_account} style={{ marginTop: '50px' }} type='button' className='btn btn-primary' >
+                            Verify
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </Fragment>
+    )
 }
 
-export default Activate;
+export default connect(null, { verify })(Activate);

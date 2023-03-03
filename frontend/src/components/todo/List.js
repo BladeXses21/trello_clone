@@ -19,32 +19,34 @@ class List extends Component {
     render() {
         return (
             <Fragment>
-                <table className='table table-striped'>
-                    <thead>
-                        <tr>
-                            <th>title</th>
-                            <th>description</th>
-                            <th>done</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.todos.map(todo => (
-                            <tr key={todo.id}>
-                                <td>{todo.title}</td>
-                                <td>{todo.description}</td>
-                                <td><input
-                                    onChange={this.props.toggleTodo.bind(this, todo)}
-                                    type='checkbox' defaultChecked={todo.done} />
-                                </td>
-                                <td><button
-                                    onClick={this.props.deleteTodo.bind(this, todo.id)}
-                                    className='btn btn-danger btn-sm'>Delete</button>
-                                </td>
+                <div className='card card-body mt-4 mb-4'>
+                    <table className='table table-striped'>
+                        <thead>
+                            <tr>
+                                <th>title</th>
+                                <th>description</th>
+                                <th>done</th>
+                                <th></th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {this.props.todos.map(todo => (
+                                <tr key={todo.id}>
+                                    <td>{todo.title}</td>
+                                    <td>{todo.description}</td>
+                                    <td><input
+                                        onChange={this.props.toggleTodo.bind(this, todo)}
+                                        type='checkbox' defaultChecked={todo.done} />
+                                    </td>
+                                    <td><button
+                                        onClick={this.props.deleteTodo.bind(this, todo.id)}
+                                        className='btn btn-danger btn-sm'>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </Fragment>
         )
     }

@@ -15,6 +15,7 @@ import Signup from './containers/Signup';
 import Layout from './components/layout/Layout';
 import DashBoard from './components/todo/Dashboard';
 
+import List from './components/trello/List';
 
 if(process.env.NODE_ENV === 'debug'){
     setDebugLevel(1)
@@ -33,6 +34,7 @@ const App = () => (
                         <Route exact path='/reset-password' element={ <ResetPassword/> } />
                         <Route exact path='/password/reset/confirm/:uid/:token' element={ <ResetPasswordConfirm/> } />
                         <Route exact path='/activate/:uid/:token' element={ <Activate/> } />
+                        <Route exact path='/trello' element={ <List/> } />
                     </Route>
                 </Routes>
             </Router>

@@ -35,6 +35,14 @@ const Header = ({ logout, isAuthenticated }) => {
         </li>
     );
 
+    const trelloLinks = () => (
+        <li className="nav-item">
+            <Link className="nav-link" to="/trello">Trello <span className='sr-only'>(current)</span></Link>
+        </li>
+    );
+
+
+
     return (
         <Fragment>
             <div>
@@ -42,6 +50,7 @@ const Header = ({ logout, isAuthenticated }) => {
                 <Link className="navbar-brand" to="/">Auth System</Link>
                     <ul className="navbar-nav">
                         { isAuthenticated ? todoLinks() : null}
+                        { isAuthenticated ? trelloLinks() : null}
                         { isAuthenticated ? authLinks() : guestLinks() }
                     </ul>
               </nav>

@@ -31,21 +31,23 @@ const ResetPassword = ({ reset_password }) => {
     return (
         <Fragment>
             <div className="container mt-5">
-                <h1>Request Password Reset:</h1>
-                <form onSubmit={e => onSubmit(e)}>
-                    <div className="form-group">
-                        <input
-                            className="form-control"
-                            type="email"
-                            placeholder="Email"
-                            name="email"
-                            value={email}
-                            onChange={onChange}
-                            required
-                        />
-                    </div>
-                    <button className="btn btn-primary" type="submit">Reset Password</button>
-                </form>
+                <div className="jumbotron mt-5">
+                    <h1>Request Password Reset:</h1>
+                    <form onSubmit={e => onSubmit(e)}>
+                        <div className="form-group">
+                            <input
+                                className="form-control"
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                value={email}
+                                onChange={onChange}
+                                required
+                            />
+                        </div>
+                        <button className="btn btn-primary" type="submit">Reset Password</button>
+                    </form>
+                </div>
             </div>
         </Fragment>
     );
