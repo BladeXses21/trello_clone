@@ -13,8 +13,24 @@ class UserAccountManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
 
         user.set_password(password)
-        user.save()
+        user.save(using=self._db)
 
+        return user
+
+    def create_staffuser(self, email, password, name):
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.create_user(email=email, password=password, name=name)
+        user.staff = True
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password, name):
+        user = self.create_user(email=email, password=password, name=name)
+        user.staff = True
+        user.admin = True
+        user.save(using=self._db)
         return user
 
 

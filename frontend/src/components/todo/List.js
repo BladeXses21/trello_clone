@@ -13,10 +13,12 @@ class List extends Component {
     };
 
     componentDidMount() {
+        console.log('List')
         this.props.getTodos();
     };
 
     render() {
+        console.log('render')
         return (
             <Fragment>
                 <div className='card card-body mt-4 mb-4'>

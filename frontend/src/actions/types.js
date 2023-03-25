@@ -23,4 +23,7 @@ export const LOGOUT = 'LOGOUT';
 
 // trello
 export const ADD_CARD = "ADD_CARD";
+export const GET_CARDS = "GET_CARDS";
 export const ADD_LIST = "ADD_LIST";
+export const GET_LISTS = "GET_LIST"
+export const DRAG_HAPPENED = "DRAG_HAPPENED";

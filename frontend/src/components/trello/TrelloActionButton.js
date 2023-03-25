@@ -27,32 +27,32 @@ class TrelloActionButton extends React.PureComponent {
 
     handleInputChange = e => {
        this.setState({
-            text: e.target.value
+            title: e.target.value
        });
     };
 
     handleAddList = () => {
         const { dispatch } = this.props;
-        const { text } = this.state;
+        const { title } = this.state;
 
-        if (text) {
+        if (title) {
             this.setState({
-               text: ""
+               title: ""
             });
-            dispatch(addList(text));
+            dispatch(addList(title));
         }
         return;
     };
 
     handleAddCard = () => {
         const { dispatch, listID } = this.props;
-        const { text } = this.state;
+        const { title } = this.state;
 
-        if (text) {
+        if (title) {
             this.setState({
-               text: ""
+               title: ""
             });
-            dispatch(addCard(listID, text));
+            dispatch(addCard(listID, title));
         }
     };
 
@@ -88,35 +88,35 @@ class TrelloActionButton extends React.PureComponent {
 
 
         return <div>
-            <Card style={{
-                overflow: "visible",
-                minHeight: 80,
-                minWidth: 272,
-                padding: "6px 8px 2px"
-            }}>
-                <Textarea
-                    placeholder={placeholder}
-                    autoFocus
-                    onBlur={this.closeForm}
-                    value={this.state.text}
-                    onChange={this.handleInputChange}
-                    style={{
-                        resize: "none",
-                        width: "100%",
-                        outline: "none",
-                        overflow: "hidden",
-                        border: "none"
-                    }}
-                />
-            </Card>
-            <div style={styles.formButtonGroup}>
-                <Button onMouseDown={ list ? this.handleAddList : this.handleAddCard }
-                        variant="contained"
-                        style={{color: "white", backgroundColor: "#5aac44"}}
-                >{buttonTitle}{" "}</Button>
-                <AiOutlineMinus style={{ marginLeft: 8, cursor: "pointer" }}>close</AiOutlineMinus>
+                <Card style={{
+                    overflow: "visible",
+                    minHeight: 80,
+                    minWidth: 272,
+                    padding: "6px 8px 2px"
+                }}>
+                    <Textarea
+                        placeholder={placeholder}
+                        autoFocus
+                        onBlur={this.closeForm}
+                        value={this.state.title}
+                        onChange={this.handleInputChange}
+                        style={{
+                            resize: "none",
+                            width: "100%",
+                            outline: "none",
+                            overflow: "hidden",
+                            border: "none"
+                        }}
+                    />
+                </Card>
+                <div style={styles.formButtonGroup}>
+                    <Button onMouseDown={ list ? this.handleAddList : this.handleAddCard }
+                            variant="contained"
+                            style={{color: "white", backgroundColor: "#5aac44"}}
+                    >{buttonTitle}{" "}</Button>
+                    <AiOutlineMinus style={{ marginLeft: 8, cursor: "pointer" }}>close</AiOutlineMinus>
+                </div>
             </div>
-        </div>
     };
 
     render() {
