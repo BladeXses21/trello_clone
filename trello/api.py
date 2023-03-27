@@ -11,6 +11,7 @@ class TrelloCardCreateView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         list_id = request.data.get('list_id')
+        print(list_id)
         try:
             trello_list = TrelloListModel.objects.get(id=list_id)
         except TrelloListModel.DoesNotExist:
@@ -18,7 +19,7 @@ class TrelloCardCreateView(generics.CreateAPIView):
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.create(validated_data=serializer.validated_data, trello_list=trello_list)
+        serializer.save(list=trello_list)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 

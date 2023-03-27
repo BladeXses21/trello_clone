@@ -5,14 +5,26 @@ axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
 axios.defaults.xsrCookieName = 'csrftoken';
 
 
-export const addList = (list) => {
-    axios.post(`api/lists/`, list)
+export const getLists = () => dispatch => {
+    axios.get('/lists/')
         .then(result => {
             dispatch({
-                type: ADD_LIST,
+                type: GET_LISTS,
                 payload: result.data
             });
         }).catch(error => console.log(error));
+};
+
+export const addList = (title) => async (dispatch) => {
+    try {
+        const { data } = await axios.post('/lists/', { title });
+        dispatch({
+            type: ADD_LIST,
+            payload: data
+        });
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 export const sort = (
@@ -34,14 +46,4 @@ export const sort = (
             type
         }
     };
-};
-
-export const getLists = () => dispatch => {
-    axios.get('/api/lists/')
-        .then(result => {
-            dispatch({
-                type: GET_LISTS,
-                payload: result.data
-            });
-        }).catch(error => console.log(error));
 };

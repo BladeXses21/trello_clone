@@ -41,12 +41,13 @@ const TrelloList = ({ title, listID, index }) => {
     const [cards, setCards] = useState([])
 
     useEffect(() => {
-        axios.get(`/cards/?list=${listID}`)
+        axios.get(`/card-lists/?list=${listID}`)
             .then(response => setCards(response.data))
             .catch(error => console.error(error))
     }, [listID]);
 
-    console.log(cards)
+
+    console.log(cards, 'cards')
     const handleClickCard = (card) => {
         console.log(`Clicked on card ${card.id}`);
     };

@@ -20,15 +20,15 @@ const Placeholder = styled.div`
     width: 100%; height: 50px;
 `;
 
-const List = () => {
+const List = ( { getLists }) => {
     const dispatch = useDispatch();
-    const [lists, setLists] = useState([])
+
+    const lists = useSelector((state) => (state.trello.lists));
 
     useEffect(() => {
-        axios.get('/lists/')
-            .then(response => setLists(response.data))
-            .catch(error => console.error(error))
-    }, []);
+        getLists()
+    }, [getLists]);
+
 
     const onDragEnd = useCallback(
         (result) => {
@@ -51,7 +51,8 @@ const List = () => {
     },
     [dispatch]
 );
-    if (typeof lists === 'object' && Array.isArray(lists)) {
+
+    if (Array.isArray(lists)) {
       console.log(lists, "масив");
     } else {
       console.log(lists, "не масив");
@@ -83,4 +84,8 @@ const List = () => {
       );
     };
 
-export default List;
+const mapDispatchToProps = {
+    getLists
+};
+
+export default connect(null, mapDispatchToProps)(List);

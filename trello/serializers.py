@@ -25,8 +25,15 @@ class TrelloListSerializer(serializers.ModelSerializer):
 
 class CardListSerializer(serializers.ModelSerializer):
     card = TrelloCardSerializer()
-    list = TrelloListSerializer()
+    card_id = serializers.IntegerField()
+    list_id = serializers.IntegerField()
 
     class Meta:
         model = CardListModel
         fields = '__all__'
+
+    def create(self, validated_data):
+        card_data = validated_data.pop('card')
+        card = TrelloCardModel.objects.create(**card_data)
+        instance, created = self.Meta.model.objects.update_or_create(card=card, list_id=validated_data['list_id'], defaults=validated_data)
+        return instance

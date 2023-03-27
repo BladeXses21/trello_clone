@@ -21,9 +21,18 @@ export const PASSWORD_RESET_CONFIRM_SUCCESS = 'PASSWORD_RESET_CONFIRM_SUCCESS';
 export const PASSWORD_RESET_CONFIRM_FAIL = 'PASSWORD_RESET_CONFIRM_FAIL';
 export const LOGOUT = 'LOGOUT';
 
-// trello
-export const ADD_CARD = "ADD_CARD";
+// trello CARDS
+export const ADD_CARD_REQUEST = "ADD_CARD_REQUEST";
+export const ADD_CARD_SUCCESS = "ADD_CARD_SUCCESS";
+export const ADD_CARD_FAIL = "ADD_CARD_FAIL"
 export const GET_CARDS = "GET_CARDS";
+
+// trello LISTS
 export const ADD_LIST = "ADD_LIST";
 export const GET_LISTS = "GET_LIST"
 export const DRAG_HAPPENED = "DRAG_HAPPENED";
+
+// trello CARD-LISTS
+export const ADD_CARD_LISTS_REQUEST = "ADD_CARD_LISTS_REQUEST";
+export const ADD_CARD_LISTS_SUCCESS = "ADD_CARD_LISTS_SUCCESS";
+export const ADD_CARD_LISTS_FAIL = "ADD_CARD_LISTS_FAIL";

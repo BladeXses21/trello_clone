@@ -6,5 +6,5 @@ import listReducer from './trello_reducer';
 export default combineReducers({
     todos,
     auth,
-    lists: listReducer
+    trello: listReducer
 });
