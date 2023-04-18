@@ -1,27 +1,12 @@
 from rest_framework import generics, status
+from rest_framework.decorators import api_view
+from rest_framework.generics import UpdateAPIView
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from .models import TrelloCardModel, TrelloListModel
+from .models import TrelloListModel
 from .serializers import TrelloCardSerializer, TrelloListSerializer
-
-
-class TrelloCardCreateView(generics.CreateAPIView):
-    queryset = TrelloCardModel.objects.all()
-    serializer_class = TrelloCardSerializer
-
-    def create(self, request, *args, **kwargs):
-        list_id = request.data.get('list_id')
-        print(list_id)
-        try:
-            trello_list = TrelloListModel.objects.get(id=list_id)
-        except TrelloListModel.DoesNotExist:
-            return Response({'error': 'TrelloList does not exist'}, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(list=trello_list)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class TrelloListView(generics.ListAPIView):
@@ -35,3 +20,13 @@ class TrelloListView(generics.ListAPIView):
         for item in data:
             item['cards'] = TrelloCardSerializer(item['cards'], many=True).data
         return Response(data)
+
+
+@api_view(['PUT'])
+def update_lists(request):
+    lists = request.data.get('lists')
+    serializer = TrelloListSerializer(data=lists, many=True)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+
+    return Response(serializer.data)

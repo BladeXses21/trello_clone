@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'todoapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'data.sqlite3',
     }
 }
 
@@ -151,7 +151,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'restapi2121@gmail.com'
-EMAIL_HOST_PASSWORD = 'mdywnkkhvjfxsivr'
+EMAIL_HOST_PASSWORD = 'epwxovrcztrtsrmy'
 EMAIL_USE_TLS = True
 
 DJOSER = {

@@ -1,11 +1,10 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import CardListSet, TrelloListSet, TrelloCardSet
+from .views import TrelloListSet, TrelloCardSet
 
 router = routers.DefaultRouter()
-router.register('lists', TrelloListSet)
-router.register('cards', TrelloCardSet)
-router.register('card-lists', CardListSet)
+router.register('api/lists', TrelloListSet)
+router.register('api/cards', TrelloCardSet)
 
 urlpatterns = [
     path('', include(router.urls)),

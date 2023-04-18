@@ -4,8 +4,9 @@ import Card from "@material-ui/core/Card";
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/Ai';
 import Button from "@material-ui/core/Button";
 import { useDispatch } from "react-redux";
+import { connect } from 'react-redux';
 import { addList } from "../../actions/trello_list";
-import { addCard } from "../../actions/trello_card";
+import { addNewCard } from "../../actions/trello_card";
 
 const TrelloActionButton = ({ listID, list }) => {
 
@@ -35,7 +36,7 @@ const TrelloActionButton = ({ listID, list }) => {
     const handleAddCard = () => {
         if (title) {
             setTitle("");
-            dispatch(addCard(listID, { name: title, description: "qweq", icon: "https://example.com/icon.png", comment: "qwewqe"}));
+            dispatch(addNewCard(title, listID));
         }
     };
 
@@ -110,4 +111,4 @@ const TrelloActionButton = ({ listID, list }) => {
     return formOpen ? renderForm() : renderAddButton();
 };
 
-export default TrelloActionButton;
+export default connect(null, { addList, addNewCard })(TrelloActionButton);
